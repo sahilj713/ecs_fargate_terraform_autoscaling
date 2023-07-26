@@ -17,9 +17,12 @@ module "vpc" {
     Environment = "dev"
   }
 }
+
 module "ecs" {
   source = "./ecs"
   pub_sub_id = module.vpc.public_subnets
   vpc_id = module.vpc.vpc_id
   private_subnet_id = module.vpc.private_subnets
+  cluster_name = "ecs_cluster"
+  service_name = "ecs_terraform_service"
 }

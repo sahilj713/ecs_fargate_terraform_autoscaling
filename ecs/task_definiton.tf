@@ -19,34 +19,34 @@ resource "aws_ecs_task_definition" "ecs_terraform_task_def" {
           "containerPort" = 80
           "hostPort"      = 80
         }
-      ],
-      "logConfiguration": {
-        "logDriver": "awsfirelens",
-        "options": {
-          "Name": "newrelic"
-        },
-        "secretOptions": [
-          {
-            "name": "licenseKey",
-            "valueFrom": "arn:aws:secretsmanager:us-east-1:382904467012:secret:licenseKey-82AfeN"
-          }
-        ]
-      }
-    },
-  
-  
-  {
-      "essential": true,
-      // Image below is New Relic's Fluent Bit output plugin available on ECR
-      "image": "533243300146.dkr.ecr.us-east-1.amazonaws.com/newrelic/logging-firelens-fluentbit",
-      "name": "log_router",
-      "firelensConfiguration": {
-        "type": "fluentbit",
-        "options": {
-          "enable-ecs-log-metadata": "true"
-        }
-      }
+      ]
+      # "logConfiguration": {
+      #   "logDriver": "awsfirelens",
+      #   "options": {
+      #     "Name": "newrelic"
+      #   },
+      #   "secretOptions": [
+      #     {
+      #       "name": "licenseKey",
+      #       "valueFrom": "arn:aws:secretsmanager:us-east-1:382904467012:secret:licenseKey-82AfeN"
+      #     }
+      #   ]
+      # }
     }
+  
+  
+  # {
+  #     "essential": true,
+  #     // Image below is New Relic's Fluent Bit output plugin available on ECR
+  #     "image": "533243300146.dkr.ecr.us-east-1.amazonaws.com/newrelic/logging-firelens-fluentbit",
+  #     "name": "log_router",
+  #     "firelensConfiguration": {
+  #       "type": "fluentbit",
+  #       "options": {
+  #         "enable-ecs-log-metadata": "true"
+  #       }
+  #     }
+  #   }
 ])
 
 }

@@ -14,6 +14,26 @@ resource "aws_iam_role" "task_def_role" {
     ]
   })
 }
+
+resource "aws_iam_role" "ecs-autoscale-role" {
+  name = "ecs-scale-application"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "application-autoscaling.amazonaws.com"
+      },
+      "Effect" : "Allow"
+    }
+   ]
+  }
+  EOF
+}    
+
 resource "aws_iam_role_policy" "ecr-iam-policy" {
   name = "ecs_sj_task_def_policy"
   role = aws_iam_role.task_def_role.id

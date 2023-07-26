@@ -1,5 +1,5 @@
 resource "aws_ecs_service" "ecs_terraform_service" {
-  name            = "ecs_terraform_service"
+  name            = var.service_name
   launch_type = "FARGATE"
   cluster         = aws_ecs_cluster.ecs-cluster.id
   task_definition = aws_ecs_task_definition.ecs_terraform_task_def.id
