@@ -51,7 +51,7 @@ jobs:
         #working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
             
-            sh "terraform init"
+            terraform init
             sh "terraform plan"
 
       # - name: review-and-approve-and-terraform-apply
