@@ -8,7 +8,7 @@ on:
         required: true
         type: choice
         options:
-        - ecs
+        - ECS
         - cognito
 
       Infra_env:
@@ -52,8 +52,8 @@ jobs:
             sh "terraform init"
             sh "terraform plan"
 
-      - name: review-and-approve
-        if: ${{ inputs.Operations }} == 'create'
+      - name: review-and-approve-and-terraform-apply
+        if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
         working-directory: ./${{ AWS_service }}/${{ Infra_env }}
         with: 
           approvers: sahilj713
@@ -63,10 +63,12 @@ jobs:
           exclude-workflow-initiator-as-approver: false
           additional-approved-words: ''
           additional-denied-words: ''
-
-      - name: terraform-apply
-        if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
-        working-directory: ./${{ AWS_service }}/${{ Infra_env }}
         run: |
 
-            sh "terraform apply -auto-approve"                 
+            sh "terraform apply -auto-approve"
+      # - name: terraform-apply
+      #   if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
+      #   working-directory: ./${{ AWS_service }}/${{ Infra_env }}
+      #   run: |
+
+      #       sh "terraform apply -auto-approve"                 
