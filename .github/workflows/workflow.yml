@@ -48,9 +48,9 @@ jobs:
 
       - name: terraform-plan-for-create
         if: ${{ inputs.Operations }} == 'create'
-        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+        #working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
-
+            sh "cd ./ECS/dev"
             sh "terraform init"
             sh "terraform plan"
 
