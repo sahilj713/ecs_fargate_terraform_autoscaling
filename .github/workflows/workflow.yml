@@ -60,7 +60,7 @@ jobs:
       - uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: org-team
+          approvers: sahilj713
           minimum-approvals: 1
           issue-title: "Have you reviewed the terraform plan for changes? Do you want to proceed with it?"
           issue-body: "Please approve or deny"
