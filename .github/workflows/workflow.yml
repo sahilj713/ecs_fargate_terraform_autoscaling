@@ -46,7 +46,7 @@ jobs:
 
       - name: terraform-plan-for-create
         if: ${{ inputs.Operations }} == 'create'
-        working-directory: ./${{ AWS_service }}/${{ Infra_env }}
+        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
 
             sh "terraform init"
@@ -54,7 +54,7 @@ jobs:
 
       - name: review-and-approve-and-terraform-apply
         if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
-        working-directory: ./${{ AWS_service }}/${{ Infra_env }}
+        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         with: 
           approvers: sahilj713
           minimum-approvals: 1
