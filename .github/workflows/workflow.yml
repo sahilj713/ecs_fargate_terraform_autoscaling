@@ -28,6 +28,8 @@ on:
         - create
         - destroy
         
+env: 
+      AWS_DEFAULT_REGION : us-east-1
 
 jobs:
   
