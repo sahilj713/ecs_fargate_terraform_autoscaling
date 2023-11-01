@@ -50,7 +50,7 @@ jobs:
         if: ${{ inputs.Operations }} == 'create'
         #working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
-            sh "cd ./ecs/dev"
+            
             sh "terraform init"
             sh "terraform plan"
 
