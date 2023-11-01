@@ -67,7 +67,7 @@ jobs:
         
       - name: terraform-apply
         if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
-        working-directory: ./${{ AWS_service }}/${{ Infra_env }}
+        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
 
             sh "terraform apply -auto-approve"                 
