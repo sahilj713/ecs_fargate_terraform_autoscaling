@@ -58,7 +58,8 @@ jobs:
       #   if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
       #   working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
       - uses: trstringer/manual-approval@v1
-        with: 
+        with:
+          secret: ${{ github.TOKEN }}
           approvers: sahilj713
           minimum-approvals: 1
           issue-title: "Have you reviewed the terraform plan for changes? Do you want to proceed with it?"
