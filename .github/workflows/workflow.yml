@@ -61,9 +61,11 @@ jobs:
 
       # - name: review-and-approve-and-terraform-apply
       #   if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
-      #   working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
-      - uses: trstringer/manual-approval@v1
+      #   working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }
+      - name: Approval
         if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
+        uses: trstringer/manual-approval@v1
+        #if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
         with:
           secret: ${{ github.TOKEN }}
           approvers: sahilj713
