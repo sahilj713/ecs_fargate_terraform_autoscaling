@@ -51,12 +51,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
+      - name: terraform-init
+        run: |
+
+            terraform init
+
       - name: terraform-plan-for-create
         if: ${{ github.event.inputs.Operations == 'create' }}
         #working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
             
-            terraform init
             terraform plan
 
       # - name: review-and-approve-and-terraform-apply
