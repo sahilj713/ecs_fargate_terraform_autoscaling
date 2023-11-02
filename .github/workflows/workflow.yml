@@ -63,6 +63,7 @@ jobs:
       #   if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
       #   working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
       - uses: trstringer/manual-approval@v1
+        if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
         with:
           secret: ${{ github.TOKEN }}
           approvers: sahilj713
@@ -75,7 +76,7 @@ jobs:
         
       - name: terraform-apply
         if: ${{ inputs.Operations }} == 'create' && github.ref_name == github.event.repository.default_branch
-        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+        #working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
 
-            sh "terraform apply -auto-approve"                 
+            terraform apply -auto-approve                
