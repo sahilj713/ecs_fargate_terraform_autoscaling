@@ -52,14 +52,14 @@ jobs:
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
       - name: terraform-init
-        working-directory: ${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+        # working-directory: ${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
 
             terraform init
 
       - name: terraform-plan-for-create
         if: ${{ github.event.inputs.Operations == 'create' }}
-        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+        # working-directory: ${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
             
             terraform plan
@@ -84,7 +84,7 @@ jobs:
       - name: terraform-apply
         if: ${{ github.event.inputs.Operations == 'create' }} 
         #&& github.ref_name == github.event.repository.default_branch
-        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+        # working-directory: ${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
 
             terraform apply -auto-approve
@@ -92,7 +92,7 @@ jobs:
       - name: terraform-plan-for-destroy
         if: ${{ github.event.inputs.Operations == 'destroy' }} 
         #&& github.ref_name == github.event.repository.default_branch
-        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+        # working-directory: ${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
 
             terraform plan -destroy
@@ -113,7 +113,7 @@ jobs:
       - name: terraform-destroy
         if: ${{ github.event.inputs.Operations == 'destroy' }} 
         #&& github.ref_name == github.event.repository.default_branch
-        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+        # working-directory: ${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
 
             terraform destroy -auto-approve                  
