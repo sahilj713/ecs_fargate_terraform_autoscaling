@@ -52,7 +52,7 @@ jobs:
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
       - name: terraform-init
-        working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+        working-directory: ${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
         run: |
 
             terraform init
