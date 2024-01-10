@@ -67,7 +67,7 @@ jobs:
       #   if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
       #   working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }
       - name: Approval
-        #if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
+        if: ${{ github.event.inputs.Operations == 'create' }}
         uses: trstringer/manual-approval@v1
         #if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
         with:
