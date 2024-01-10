@@ -65,8 +65,8 @@ jobs:
 
       # - name: review-and-approve-and-terraform-apply
       #   if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
-      #   working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }
-      - name: Approval for creating the ${{ inputs.AWS_service }} ${{ inputs.Infra_env } infra
+      #   working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }}
+      - name: Approval for creating the ${{ inputs.AWS_service }} ${{ inputs.Infra_env }} infra
         if: ${{ github.event.inputs.Operations == 'create' }}
         uses: trstringer/manual-approval@v1
         #if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
@@ -96,7 +96,7 @@ jobs:
 
             terraform plan -destroy
 
-      - name: Approval for destroying the ${{ inputs.AWS_service }} ${{ inputs.Infra_env } infra
+      - name: Approval for destroying the ${{ inputs.AWS_service }} ${{ inputs.Infra_env }} infra
         if: ${{ github.event.inputs.Operations == 'destroy' }}
         uses: trstringer/manual-approval@v1
         with:
