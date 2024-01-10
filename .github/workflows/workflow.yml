@@ -66,7 +66,7 @@ jobs:
       # - name: review-and-approve-and-terraform-apply
       #   if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
       #   working-directory: ./${{ inputs.AWS_service }}/${{ inputs.Infra_env }
-      - name: Approval
+      - name: Approval for creating the ${{ inputs.AWS_service }} ${{ inputs.Infra_env } infra
         if: ${{ github.event.inputs.Operations == 'create' }}
         uses: trstringer/manual-approval@v1
         #if: ${{ github.event.inputs.Operations == 'create' }} && github.ref_name == github.event.repository.default_branch
@@ -95,6 +95,19 @@ jobs:
         run: |
 
             terraform plan -destroy
+
+      - name: Approval for destroying the ${{ inputs.AWS_service }} ${{ inputs.Infra_env } infra
+        if: ${{ github.event.inputs.Operations == 'destroy' }}
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: sahilj713
+          minimum-approvals: 1
+          issue-title: "Do you want to proceed with ${{ inputs.Operations }}?"
+          issue-body: "Please approve or deny"
+          exclude-workflow-initiator-as-approver: false
+          additional-approved-words: ''
+          additional-denied-words: ''      
 
       - name: terraform-destroy
         if: ${{ github.event.inputs.Operations == 'destroy' }} 
